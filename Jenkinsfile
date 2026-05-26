@@ -50,13 +50,20 @@ pipeline {
     }
 
     post {
-
         success {
-            echo 'Build réussi'
+            emailext(
+                subject: "Build réussi",
+                body: "Le build ${BUILD_NUMBER} s'est terminé avec succès.",
+                to: "njarasoatoavinarandrianarivo@gmail.com"
+            )
         }
 
         failure {
-            echo 'Build échoué'
-        }
+            emailext(
+                subject: "Build échoué",
+                body: "Le build ${BUILD_NUMBER} a échoué.",
+                to: "njarasoatoavinarandrianarivo@gmail.com"
+        )
     }
+}
 }
